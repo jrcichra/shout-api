@@ -1,9 +1,9 @@
-import { ShoutRequest } from "./types";
+import { ShoutDeleteRequest } from "./types";
 declare var SHOUT: KVNamespace;
 
 export async function del(request: Request): Promise<Response> {
 
-    let body: ShoutRequest;
+    let body: ShoutDeleteRequest;
     try {
         body = await request.json();
     } catch (error) {
@@ -22,14 +22,14 @@ export async function del(request: Request): Promise<Response> {
     }
 
     // make sure the key has the UUID they provided
-    const shoutjson: string | null = await SHOUT.get(request.url);
+    const shoutjson: string | null = await SHOUT.get(body.word);
     if (!shoutjson) {
         return new Response(JSON.stringify({ error: 'Not found' }), {
             status: 404,
             headers: { 'Content-Type': 'application/json' }
         });
     }
-    const shoutkv: ShoutRequest = JSON.parse(shoutjson);
+    const shoutkv: ShoutDeleteRequest = JSON.parse(shoutjson);
     if (shoutkv.delUUID !== body.delUUID) {
         return new Response(JSON.stringify({ error: 'Invalid UUID' }), {
             status: 400,
@@ -40,7 +40,7 @@ export async function del(request: Request): Promise<Response> {
 
     // UUID is good, delete the key
 
-    await SHOUT.delete(request.url);
+    await SHOUT.delete(body.word);
     return new Response(JSON.stringify({ success: true }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' }

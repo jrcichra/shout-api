@@ -2,4 +2,4 @@ dist
 node_modules
 transpiled
 /.idea/
-wrangler_real.toml
+wrangler.toml

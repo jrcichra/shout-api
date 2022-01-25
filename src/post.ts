@@ -1,11 +1,11 @@
-import { ShoutKV, ShoutRequest } from "./types";
+import { ShoutKV, ShoutPostRequest } from "./types";
 import { getRandomWord } from "./word";
 declare var SHOUT: KVNamespace;
 
 const MAX_TTL = 60 * 60 * 24; // 1 day
 const DEFAULT_TTL = 60 * 5 // 5 minutes
 export async function post(request: Request): Promise<Response> {
-    let body: ShoutRequest;
+    let body: ShoutPostRequest;
     try {
         body = await request.json();
     } catch (error) {
@@ -57,7 +57,7 @@ export async function post(request: Request): Promise<Response> {
     }
     const ttl = body.ttl || DEFAULT_TTL;
     await SHOUT.put(word, JSON.stringify(shoutkv), { expirationTtl: ttl });
-    return new Response(JSON.stringify({ success: true, word: word, ttl: ttl }), {
+    return new Response(JSON.stringify({ success: true, word: word, ttl: ttl, delUUID: shoutkv.delUUID }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' }
     });

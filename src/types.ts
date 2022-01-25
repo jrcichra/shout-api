@@ -1,7 +1,11 @@
-export type ShoutRequest = {
+export type ShoutPostRequest = {
     url: string;           // The URL to store
     ttl?: number;           // TTL in seconds
-    delUUID?: string;      // The UUID of the delete request
+}
+
+export type ShoutDeleteRequest = {
+    word: string;         // The word to delete
+    delUUID: string;      // The UUID of the delete request
 }
 
 export type ShoutKV = {
