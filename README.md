@@ -9,6 +9,12 @@ Like [Yellkey](https://yellkey.com) but open source and serverless. Host your ow
 + `GET` a dictionary word and redirect to the URL
 + `DELETE` a dictionary word to remove it before it expires 
 
+# Usage
++ Get `wrangler`
++ `git clone https://github.com/jrcichra/shout-api.git`
++ cd `shout-api`
++ Run `wrangler dev`
+
 # Examples
 + `POST`:
 ```
