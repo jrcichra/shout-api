@@ -1,0 +1,19 @@
+name = "shout-api"
+type = "javascript"
+zone_id = ""
+account_id = ""
+route = ""
+workers_dev = true
+compatibility_date = "2022-01-24"
+
+kv_namespaces = [ 
+         { binding = "SHOUT", id = "YOURID", preview_id = "YOURPREVIEWID" }
+]
+
+
+[build]
+command = "npm install && npm run build"
+
+
+[build.upload]
+format = "service-worker"
