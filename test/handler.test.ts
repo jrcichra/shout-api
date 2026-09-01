@@ -13,6 +13,7 @@ describe('handle', () => {
     const result = await handleRequest(new Request('/', { method: 'GET' }))
     expect(result.status).toEqual(200)
     const text = await result.text()
-    expect(text).toEqual('request method: GET')
+    // handler.ts serves a blank page at / (see the '/' branch in src/handler.ts)
+    expect(text).toEqual('')
   })
 })
